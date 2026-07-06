@@ -1,0 +1,97 @@
+<div class="contenedor">
+  <h1>🧠 Evaluador de Bienestar y Estrés</h1>
+  <p>Contesta las siguientes preguntas y te diremos cómo estás</p>
+
+  <div class="formulario">
+
+    <div class="campo">
+      <label>Edad</label>
+      <input type="number" [(ngModel)]="datos.edad" placeholder="Ej: 22" />
+    </div>
+
+    <div class="campo">
+      <label>Género</label>
+      <select [(ngModel)]="datos.genero">
+        <option value="">-- Selecciona --</option>
+        <option value="Male">Masculino</option>
+        <option value="Female">Femenino</option>
+      </select>
+    </div>
+
+    <div class="campo">
+      <label>Ocupación</label>
+      <select [(ngModel)]="datos.ocupacion">
+        <option value="">-- Selecciona --</option>
+        <option value="Software Engineer">Ingeniero de Software</option>
+        <option value="Engineer">Ingeniero</option>
+        <option value="Doctor">Doctor</option>
+        <option value="Nurse">Enfermero/a</option>
+        <option value="Teacher">Maestro/a</option>
+        <option value="Lawyer">Abogado/a</option>
+        <option value="Accountant">Contador/a</option>
+        <option value="Scientist">Científico/a</option>
+        <option value="Salesperson">Vendedor/a</option>
+        <option value="Sales Representative">Representante de Ventas</option>
+        <option value="Manager">Gerente</option>
+      </select>
+    </div>
+
+    <div class="campo">
+      <label>Horas de sueño por noche</label>
+      <input type="number" [(ngModel)]="datos.horas_sueno" placeholder="Ej: 6.5" step="0.5" />
+    </div>
+
+    <div class="campo">
+      <label>Actividad física (minutos al día)</label>
+      <input type="number" [(ngModel)]="datos.actividad_fisica" placeholder="Ej: 30" />
+    </div>
+
+    <div class="campo">
+      <label>Pasos diarios aproximados</label>
+      <input type="number" [(ngModel)]="datos.pasos_diarios" placeholder="Ej: 7000" />
+    </div>
+
+    <div class="campo">
+      <label>Categoría de peso (BMI)</label>
+      <select [(ngModel)]="datos.bmi_categoria">
+        <option value="">-- Selecciona --</option>
+        <option value="Normal">Normal</option>
+        <option value="Overweight">Sobrepeso</option>
+        <option value="Obese">Obesidad</option>
+      </select>
+    </div>
+
+    <div class="botones">
+      <button (click)="enviar()" [disabled]="cargando">
+        {{ cargando ? 'Analizando...' : 'Analizar mi bienestar' }}
+      </button>
+      <button (click)="limpiar()" class="btn-limpiar">Limpiar</button>
+    </div>
+
+  </div>
+
+  <!-- Mensaje de error -->
+  <div class="error" *ngIf="error">
+    ⚠️ {{ error }}
+  </div>
+
+  <!-- Resultado -->
+  <div class="resultado" *ngIf="resultado">
+    <h2>📊 Tu resultado</h2>
+
+    <div class="nivel" [ngClass]="{
+      'alto': resultado.nivel_estres === 'Alto',
+      'medio': resultado.nivel_estres === 'Medio',
+      'bajo': resultado.nivel_estres === 'Bajo'
+    }">
+      Nivel de estrés: <strong>{{ resultado.nivel_estres }}</strong>
+    </div>
+
+    <p class="calidad">
+      🌙 Calidad de sueño estimada: <strong>{{ resultado.calidad_sueno_predicha }}/10</strong>
+    </p>
+
+    <p class="mensaje">{{ resultado.mensaje }}</p>
+  </div>
+
+</div>
