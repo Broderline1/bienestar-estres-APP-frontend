@@ -1,43 +1,99 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #0f0f1a;
+}
+
 .contenedor {
-  max-width: 700px;
-  margin: 40px auto;
-  padding: 20px;
-  font-family: Arial, sans-serif;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 50%, #16213e 100%);
+  padding: 40px 20px;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-h1 {
-  font-size: 24px;
-  margin-bottom: 8px;
+.header {
+  text-align: center;
+  margin-bottom: 40px;
+  animation: fadeInDown 0.8s ease;
 }
 
-p {
-  color: #555;
-  margin-bottom: 20px;
+.header h1 {
+  font-size: 36px;
+  color: #ffffff;
+  font-weight: 700;
+  margin-bottom: 10px;
+  text-shadow: 0 0 20px rgba(139, 92, 246, 0.8);
+}
+
+.header p {
+  color: #a78bfa;
+  font-size: 16px;
+}
+
+.tarjeta {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(139, 92, 246, 0.3);
+  border-radius: 20px;
+  padding: 40px;
+  width: 100%;
+  max-width: 650px;
+  box-shadow: 0 8px 32px rgba(139, 92, 246, 0.2);
+  animation: fadeInUp 0.8s ease;
 }
 
 .formulario {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 20px;
 }
 
 .campo {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
 }
 
 label {
-  font-weight: bold;
-  font-size: 14px;
+  font-weight: 600;
+  font-size: 13px;
+  color: #c4b5fd;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 input, select {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 14px;
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(139, 92, 246, 0.4);
+  border-radius: 10px;
+  font-size: 15px;
+  color: #ffffff;
   width: 100%;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+input::placeholder {
+  color: #6b7280;
+}
+
+input:focus, select:focus {
+  border-color: #8b5cf6;
+  background: rgba(139, 92, 246, 0.1);
+  box-shadow: 0 0 15px rgba(139, 92, 246, 0.3);
+}
+
+select option {
+  background-color: #1a1a2e;
+  color: #ffffff;
 }
 
 .botones {
@@ -46,69 +102,174 @@ input, select {
   margin-top: 10px;
 }
 
-button {
-  padding: 12px 24px;
-  background-color: #4f46e5;
+.btn-analizar {
+  flex: 1;
+  padding: 14px 24px;
+  background: linear-gradient(135deg, #7c3aed, #a855f7);
   color: white;
   border: none;
-  border-radius: 6px;
+  border-radius: 10px;
   font-size: 16px;
+  font-weight: 600;
   cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);
 }
 
-button:disabled {
-  background-color: #a5b4fc;
+.btn-analizar:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(139, 92, 246, 0.6);
+}
+
+.btn-analizar:disabled {
+  background: linear-gradient(135deg, #4c1d95, #6d28d9);
   cursor: not-allowed;
+  transform: none;
+  opacity: 0.7;
 }
 
 .btn-limpiar {
-  background-color: #6b7280;
+  padding: 14px 24px;
+  background: transparent;
+  color: #a78bfa;
+  border: 1px solid rgba(139, 92, 246, 0.4);
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-limpiar:hover {
+  background: rgba(139, 92, 246, 0.1);
+  border-color: #8b5cf6;
+  transform: translateY(-2px);
+}
+
+.cargando-contenedor {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 30px;
+  animation: fadeIn 0.5s ease;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid rgba(139, 92, 246, 0.2);
+  border-top-color: #8b5cf6;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+.cargando-contenedor p {
+  color: #a78bfa;
+  font-size: 16px;
 }
 
 .error {
   margin-top: 20px;
-  padding: 14px;
-  background-color: #fee2e2;
-  border-radius: 6px;
-  color: #b91c1c;
+  padding: 16px;
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: 10px;
+  color: #fca5a5;
+  text-align: center;
+  animation: fadeIn 0.5s ease;
+  max-width: 650px;
+  width: 100%;
 }
 
 .resultado {
   margin-top: 30px;
-  padding: 20px;
-  border: 1px solid #e5e7eb;
-  border-radius: 10px;
+  width: 100%;
+  max-width: 650px;
+  animation: fadeInUp 0.6s ease;
+}
+
+.resultado h2 {
+  color: #ffffff;
+  font-size: 22px;
+  margin-bottom: 16px;
+  text-align: center;
 }
 
 .nivel {
-  padding: 12px;
-  border-radius: 6px;
+  padding: 16px 20px;
+  border-radius: 12px;
   font-size: 18px;
   margin-bottom: 16px;
+  text-align: center;
+  font-weight: 600;
+  animation: pulso 2s infinite;
 }
 
 .alto {
-  background-color: #fee2e2;
-  color: #b91c1c;
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  color: #fca5a5;
 }
 
 .medio {
-  background-color: #fef9c3;
-  color: #854d0e;
+  background: rgba(245, 158, 11, 0.15);
+  border: 1px solid rgba(245, 158, 11, 0.4);
+  color: #fcd34d;
 }
 
 .bajo {
-  background-color: #dcfce7;
-  color: #166534;
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  color: #6ee7b7;
 }
 
-.calidad {
+.calidad-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(139, 92, 246, 0.3);
+  border-radius: 12px;
+  padding: 16px 20px;
+  margin-bottom: 16px;
+  color: #e2e8f0;
   font-size: 16px;
-  margin-bottom: 12px;
 }
 
-.mensaje {
+.calidad-card strong {
+  color: #a78bfa;
+  font-size: 20px;
+}
+
+.mensaje-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(139, 92, 246, 0.3);
+  border-radius: 12px;
+  padding: 20px;
+  color: #cbd5e1;
   font-size: 15px;
-  line-height: 1.6;
-  color: #374151;
+  line-height: 1.7;
+}
+
+/* Animaciones */
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes pulso {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.2); }
+  50%       { box-shadow: 0 0 15px 4px rgba(139, 92, 246, 0.15); }
 }
